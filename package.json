@@ -2,7 +2,7 @@
   "name": "fool-me-thrice",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/amartainment/fool-me-thrice",
+  "homepage": "https://amartainment.github.io/fool-me-thrice",
   "dependencies": {
     "axios": "^0.18.0",
     "gh-pages": "^2.0.1",
