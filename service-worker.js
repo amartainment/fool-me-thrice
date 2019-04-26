@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/amartainment/fool-me-thrice/precache-manifest.960d808a49e28cd80e0049b83b0847f4.js"
+  "/fool-me-thrice/precache-manifest.011c931d1a17640e3a77523941aa76a8.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/amartainment/fool-me-thrice/index.html", {
+workbox.routing.registerNavigationRoute("/fool-me-thrice/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
