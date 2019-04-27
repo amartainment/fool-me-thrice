@@ -44,6 +44,23 @@ class ReadPageComponent extends React.Component {
       });
   }
 
+  //adding keypresses
+
+  
+  onKeyPressed(e,x,index) { 
+    if(e.key ==='d') {
+      this.handleSwipe(true, x, index);
+      console.log("True");
+
+    }
+    if(e.key ==='a') {
+      this.handleSwipe(false, x, index);
+
+      console.log("Fake");
+    }
+
+  }
+
   // Navigate to Write
   navigateToWrite() {
     this.props.history.push('/write');
@@ -128,7 +145,7 @@ class ReadPageComponent extends React.Component {
     }
 
     return (
-      <div>
+      <div  >
         {this.state.isSwiped === false &&
           <Cards className='master-root'>
             {this.state.cards.map((x, index) =>
@@ -136,9 +153,11 @@ class ReadPageComponent extends React.Component {
                   key={x.id}
                   onSwipeLeft={(e) => this.handleSwipe(false, x, index)}
                   onSwipeRight={(e) => this.handleSwipe(true, x, index)}
+                  
                 >
                   {x.id > 0 &&
-                    <div className="card">
+                    <div className="card" tabIndex={"0"}
+                    onKeyDown={(e) => this.onKeyPressed(e,x,x.index)}>
                       <div className="card-header">
                         <div className="points">
                           <i className="material-icons">favorite</i>
