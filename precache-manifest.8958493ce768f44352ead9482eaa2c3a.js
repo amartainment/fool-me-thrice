@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "98fe7b074bb6a10db246",
-    "url": "/fool-me-thrice/static/css/main.1dab6acc.chunk.css"
+    "revision": "fa8c2da6c229fc7d50cc",
+    "url": "/fool-me-thrice/static/css/main.93eef3f8.chunk.css"
   },
   {
-    "revision": "98fe7b074bb6a10db246",
-    "url": "/fool-me-thrice/static/js/main.8c5f7bb1.chunk.js"
+    "revision": "fa8c2da6c229fc7d50cc",
+    "url": "/fool-me-thrice/static/js/main.0cc8895c.chunk.js"
   },
   {
     "revision": "d9ba268d80ea2fcc8663",
     "url": "/fool-me-thrice/static/js/runtime~main.8507ae1b.js"
   },
   {
-    "revision": "d49ab1283f40f0425c59",
-    "url": "/fool-me-thrice/static/js/2.acbe52e0.chunk.js"
+    "revision": "094bb93f1defe663e5f2",
+    "url": "/fool-me-thrice/static/js/2.4bb0ca20.chunk.js"
   },
   {
     "revision": "82dc68ecea3a8ff67618db622399f2b5",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/fool-me-thrice/static/media/write-black.82ca0e34.svg"
   },
   {
-    "revision": "715cbd3b8a63961f381487d7b66f3ea7",
+    "revision": "b3a72954663fc7081fb1698e93a6e5eb",
     "url": "/fool-me-thrice/index.html"
   }
 ];
