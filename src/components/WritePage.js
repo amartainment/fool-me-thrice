@@ -1,6 +1,6 @@
 import React from 'react';
 import Cards, { Card } from 'react-swipe-card'
-
+import alertify from 'alertifyjs';
 import { getKeywords, createCard } from '../actions/api';
 import { withRouter } from 'react-router';
 
@@ -10,6 +10,7 @@ import ReadLogo from '../assets/read.svg';
 import WriteBlackLogo from '../assets/write-black.svg';
 
 import '../App.css';
+import '../alertify.css';
 
 class WritePageComponent extends React.Component {
 
@@ -114,6 +115,11 @@ class WritePageComponent extends React.Component {
 
     createCard(body)
       .then(res => this.resetStates());
+    // show the card
+    alertify.alert('Card Created!',body.description, function(){
+      alertify.message('Ok');
+      
+    });  
 
   }
 
