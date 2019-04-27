@@ -1,9 +1,10 @@
 import React from 'react';
+import alertify from 'alertifyjs';
 import {authenticate, createUser} from '../actions/api.js';
 import {withRouter} from 'react-router';
 
 import '../App.css';
-
+import '../alertify.css';
 class LoginPageComponent extends React.Component {
   constructor() {
       super();
@@ -35,9 +36,22 @@ class LoginPageComponent extends React.Component {
   handleSignUp = () => {
     createUser(this.state)
         .then(res => {
-          if (res && res.message) {
-            window.location.reload();
+          if (res && res.data.message) {
+            alertify.alert('Yay!',res.data.message, function(){
+              alertify.message('Ok');
+            });
+            //console.log(res.data.message);
+            //window.location.reload();
           }
+          
+          if(res.data.errors) {
+            
+              alertify.alert('Oops!',res.data.errors, function(){
+                alertify.message('Ok');
+              });
+            
+          }
+
         });
   }
 
