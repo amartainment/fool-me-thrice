@@ -11,7 +11,6 @@ import ReadLogo from '../assets/read.svg';
 import WriteBlackLogo from '../assets/write-black.svg';
 
 import '../App.css';
-import '../alertify.css';
 
 
 class WritePageComponent extends React.Component {
@@ -124,13 +123,10 @@ class WritePageComponent extends React.Component {
     // Concatenate all words and build the string
     let x = this.state.row0.concat(this.state.row1, this.state.row2);
     x = x.join(' ');
-    this.setState({
-      ...this.state,
-      currentSentence: x
-    });
 
     this.setState({
       ...this.state,
+      currentSentence: x,
       showConfirmModal: true
     });
   }
