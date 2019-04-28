@@ -1,6 +1,6 @@
 import React from 'react';
 import Cards, { Card } from 'react-swipe-card';
-import Lottie from 'react-lottie'
+import Lottie from 'react-lottie';
 import correctAnimation from '../assets/lottie-files/433-checked-done.json';
 import incorrectAnimation from '../assets/lottie-files/4386-connection-error.json';
 
@@ -19,13 +19,17 @@ class ReadPageComponent extends React.Component {
   constructor() {
     super();
 
+    this.cardRef = null;
+
     if (!(sessionStorage.getItem('token'))) {
       this.props.history.push('/');
     }
 
     this.state = {
       isSwiped: false,
-      cards: []
+      cards: [],
+      currentCard: {},
+      currentIndex: 0
     }
 
     getCards()
@@ -37,28 +41,19 @@ class ReadPageComponent extends React.Component {
               description: 'Come back again to check new cards!',
               upvotes: ''
             }];
-          this.setState({ ...this.state, cards: endcard });
+          this.setState({ ...this.state, cards: endcard, currentCard: endcard });
         } else {
-          this.setState({ ...this.state, cards: response })
+          this.setState({ ...this.state, cards: response, currentCard: response[0]})
         }
       });
   }
 
-  //adding keypresses
 
-  
-  onKeyPressed(e,x,index) { 
-    if(e.key ==='d') {
-      this.handleSwipe(true, x, index);
-      console.log("True");
-
-    }
-    if(e.key ==='a') {
-      this.handleSwipe(false, x, index);
-
-      console.log("Fake");
-    }
-
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyPress, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyPress, false);
   }
 
   // Navigate to Write
@@ -71,9 +66,22 @@ class ReadPageComponent extends React.Component {
     this.props.history.push('/dashboard');
   }
 
+  // Handle the keyboard actions, left & right
+  handleKeyPress = (event) => {
+    if (event.keyCode === 37 || event.keyCode === 65) {
+      this.cardRef.removeCard('Left', 0);
+      this.handleSwipe(false, this.state.currentCard, this.state.currentIndex);
+    } else if (event.keyCode === 39 || event.keyCode === 68) {
+      this.cardRef.removeCard('Right', 0);
+      this.handleSwipe(true, this.state.currentCard, this.state.currentIndex);
+    }
+  }
+
   // Handle the swipe action
   handleSwipe(dir, card, position) {
-    
+
+    let temp = this.state.cards;
+
     if (dir === 'end') {
       let endcard =
       {
@@ -97,10 +105,7 @@ class ReadPageComponent extends React.Component {
       updateScore(body)
         .then(response => response);
 
-      let temp = this.state.cards;
       temp.splice(position + 1, 0, error_card);
-
-      this.setState({ ...this.state, cards: temp });
 
     } else if ((card.id > 0) && (dir !== card.fake)) {
       let positive_card = {
@@ -109,10 +114,7 @@ class ReadPageComponent extends React.Component {
         upvotes: ''
       };
 
-      let temp = this.state.cards;
       temp.splice(position + 1, 0, positive_card);
-
-      this.setState({ ...this.state, cards: temp });
 
       let body = {
         card_id: card.id,
@@ -122,6 +124,13 @@ class ReadPageComponent extends React.Component {
       updateScore(body)
         .then(response => response);
     }
+
+    this.setState(
+      { ...this.state,
+        currentCard: temp[position + 1],
+        currentIndex: position + 1, 
+        cards: temp 
+      });
   }
 
   render() {
@@ -147,7 +156,9 @@ class ReadPageComponent extends React.Component {
     return (
       <div  >
         {this.state.isSwiped === false &&
-          <Cards className='master-root'>
+          <Cards 
+            ref={instance => this.cardRef = instance}
+            className='master-root'>
             {this.state.cards.map((x, index) =>
                 <Card
                   key={x.id}

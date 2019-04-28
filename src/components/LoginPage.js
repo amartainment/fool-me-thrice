@@ -2,6 +2,7 @@ import React from 'react';
 import alertify from 'alertifyjs';
 import {authenticate, createUser} from '../actions/api.js';
 import {withRouter} from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
 
 import '../App.css';
 import '../alertify.css';
@@ -25,31 +26,32 @@ class LoginPageComponent extends React.Component {
   handleSubmit() {
     authenticate(this.state)
         .then(res => {
-          if (res.data.topics.length) {
-            this.props.history.push('/read');
+          if (res.status === 200) {
+            if (res.data.topics.length) {
+              this.props.history.push('/read');
+            } else {
+              this.props.history.push('/select');
+            }
           } else {
-            this.props.history.push('/select');
+            toast.error(res.error, {
+              position: toast.POSITION.BOTTOM_RIGHT
+            })
           }
-        });
+        })
   }
 
   handleSignUp = () => {
     createUser(this.state)
         .then(res => {
-          if (res && res.data.message) {
-            alertify.alert('Yay!',res.data.message, function(){
-              alertify.message('Ok');
-            });
-            //console.log(res.data.message);
-            //window.location.reload();
-          }
-          
-          if(res.data.errors) {
-            
-              alertify.alert('Oops!',res.data.errors, function(){
-                alertify.message('Ok');
-              });
-            
+          if (res && res.message) {
+            toast.success(res.message + ' Logging you in...', {
+              position: toast.POSITION.BOTTOM_RIGHT
+            })
+            this.handleSubmit(this.state);
+          } else if (res.errors) {
+            toast.error(res.errors, {
+              position: toast.POSITION.BOTTOM_RIGHT
+            })
           }
 
         });
@@ -73,6 +75,7 @@ class LoginPageComponent extends React.Component {
                 </div>
             </div>
         </div>
+        <ToastContainer />
       </div>
     )
   }

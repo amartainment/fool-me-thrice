@@ -8,13 +8,15 @@
     "axios": "^0.18.0",
     "gh-pages": "^2.0.1",
     "react": "15.4.2",
+    "react-bootstrap": "0.32.4",
     "react-chips": "^0.8.0",
     "react-dom": "15.4.2",
     "react-lottie": "^1.2.3",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "react-swipe-card": "^0.1.4"
+    "react-swipe-card": "^0.1.4",
+    "react-toastify": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
