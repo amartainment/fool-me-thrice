@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/fool-me-thrice/precache-manifest.d8eac53af8faab5b8f79fbf536bede53.js"
+  "/fool-me-thrice/precache-manifest.9a55fed9334cb788f89876edd82419eb.js"
 );
 
 workbox.clientsClaim();
