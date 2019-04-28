@@ -1,5 +1,4 @@
 import React from 'react';
-import alertify from 'alertifyjs';
 import {authenticate, createUser} from '../actions/api.js';
 import {withRouter} from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
