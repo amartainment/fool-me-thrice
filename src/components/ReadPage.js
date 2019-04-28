@@ -50,10 +50,10 @@ class ReadPageComponent extends React.Component {
 
 
   componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyPress, false);
+    document.addEventListener("keyup", this.handleKeyPress, false);
   }
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyPress, false);
+    document.removeEventListener("keyup", this.handleKeyPress, false);
   }
 
   // Navigate to Write
@@ -154,7 +154,7 @@ class ReadPageComponent extends React.Component {
     }
 
     return (
-      <div  >
+      <div>
         {this.state.isSwiped === false &&
           <Cards 
             ref={instance => this.cardRef = instance}
@@ -164,11 +164,9 @@ class ReadPageComponent extends React.Component {
                   key={x.id}
                   onSwipeLeft={(e) => this.handleSwipe(false, x, index)}
                   onSwipeRight={(e) => this.handleSwipe(true, x, index)}
-                  
                 >
                   {x.id > 0 &&
-                    <div className="card" tabIndex={"0"}
-                    onKeyDown={(e) => this.onKeyPressed(e,x,x.index)}>
+                    <div className="card">
                       <div className="card-header">
                         <div className="points">
                           <i className="material-icons">favorite</i>
